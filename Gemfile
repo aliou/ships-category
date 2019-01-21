@@ -14,6 +14,8 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
+
+  gem 'faker'
 end
 
 group :development do

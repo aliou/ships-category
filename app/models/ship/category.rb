@@ -13,9 +13,14 @@ class Ship::Category
   end
 
   def initialize(category)
-    raise InvalidCategory, category unless category.in?(VALID_CATEGORIES)
+    raise InvalidCategory, category unless category.to_s.in?(VALID_CATEGORIES)
 
-    @raw_category = category
+    @raw_category = category.to_s
+  end
+
+  # This needs to be below the initializer.
+  VALID_CATEGORIES.each do |category|
+    const_set(category.upcase, new(category))
   end
 
   # Conform to comparable.
@@ -25,6 +30,10 @@ class Ship::Category
 
   def to_s
     raw_category
+  end
+
+  def inspect
+    "#{self.class}::#{to_s.upcase}"
   end
 
   private

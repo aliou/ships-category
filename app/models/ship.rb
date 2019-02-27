@@ -1,10 +1,7 @@
 class Ship < ApplicationRecord
-  VALID_CATEGORIES = %w(
-    shuttle supply_carrier troop_carrier war_ship
-  ).freeze
+  attribute :category, :ship_category
+  attribute :test_attribute, :integer
 
   validates :name, presence: true
   validates :category, presence: true
-
-  validates :category, inclusion: { in: VALID_CATEGORIES }
 end

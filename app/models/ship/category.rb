@@ -18,13 +18,23 @@ class Ship::Category
     @raw_category = category
   end
 
+  VALID_CATEGORIES.each { |raw_cat| const_set(raw_cat.upcase, new(raw_cat)) }
+
   # Conform to comparable.
   def <=>(other)
-    to_s <=> other.to_s
+    position <=> other.position
+  end
+
+  def position
+    @position ||= VALID_CATEGORIES.index(to_s)
   end
 
   def to_s
     raw_category
+  end
+
+  def inspect
+    "#{self.class}::#{raw_category.upcase}"
   end
 
   private
